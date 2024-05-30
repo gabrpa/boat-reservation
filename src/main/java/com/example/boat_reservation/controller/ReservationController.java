@@ -15,19 +15,20 @@ public class ReservationController {
   @Autowired
   ReservationService reservationService;
   
+  @GetMapping("/all")
+  public List<Reservation> getAllReservation() {
+    return reservationService.getAllReservation();
+  }
+
   @GetMapping("/get/{id}")
   public Reservation getReservationById(@PathVariable Long id) {
     return reservationService.getReservationById(id);
   }
 
-  @GetMapping("/get/all")
-  public List<Reservation> getAllReservation() {
-    return reservationService.getAllReservation();
-  }
 
-  @PostMapping("/new")
-  public Reservation createReservation(@RequestBody Reservation reservation) {
-    return reservationService.createReservation(reservation);
+  @PostMapping("/create/{customerId}/")
+  public Reservation createReservation(@RequestBody Reservation reservation, @PathVariable Long customerId ) throws Exception {
+    return reservationService.createReservation(reservation, customerId);
   }
 
   @DeleteMapping("/delete/{id}")

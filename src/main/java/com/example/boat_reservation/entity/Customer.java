@@ -8,12 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 
 @Entity
 @Data
 @NoArgsConstructor
+
 @AllArgsConstructor
 @Table(name = "customer")
 public class Customer {
@@ -26,7 +28,7 @@ public class Customer {
   private Date birthday;
   private String country;
 
-  @ManyToMany(mappedBy = "customers")
-  private Set<Reservation> reservations;
-  
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  private Set<Reservation> reservations = new HashSet<>();
+
 }

@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.boat_reservation.dto.CreateCustomerDTO;
 import com.example.boat_reservation.entity.Customer;
+import com.example.boat_reservation.entity.Reservation;
 import com.example.boat_reservation.repository.CustomerRepository;
 
-import jakarta.transaction.Transactional;
 
 @Service
 public class CustomerService {
@@ -19,14 +19,18 @@ public class CustomerService {
     return customerRepository.findById(id).orElse(null);
   }
 
-  public Customer createCustomer(CreateCustomerDTO customer) {
+  public Customer createCustomer(Customer customer) {
     return customerRepository.save(customer);
   }
 
-  @Transactional
-  public Customer updateCustomer(Long id, Customer customer) {
-    // var c = customerRepository.getReferenceById(id);
-    return customer;
+  public Customer updateCustomer(Long id, Customer customer) throws Exception {
+    var c = getCustomerById(id);
+    if (c == null) {
+      throw new Exception("Customer ID " + id + " Not found");
+    } 
+    else {
+      return customerRepository.save(customer);
+    }
   }
 
   public void deleteCustomer(Long id) {
