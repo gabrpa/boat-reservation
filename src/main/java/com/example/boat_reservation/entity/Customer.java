@@ -3,19 +3,15 @@ package com.example.boat_reservation.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.List;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
-
 @AllArgsConstructor
 @Table(name = "customer")
 public class Customer {
@@ -29,6 +25,6 @@ public class Customer {
   private String country;
 
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  private Set<Reservation> reservations = new HashSet<>();
+  private List<Reservation> reservations;
 
 }

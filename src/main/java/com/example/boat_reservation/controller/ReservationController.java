@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.boat_reservation.dto.res.ReservationDTO;
 import com.example.boat_reservation.entity.Reservation;
 import com.example.boat_reservation.service.ReservationService;
 
@@ -27,7 +28,7 @@ public class ReservationController {
 
 
   @PostMapping("/create/{customerId}/")
-  public Reservation createReservation(@RequestBody Reservation reservation, @PathVariable Long customerId ) throws Exception {
+  public ReservationDTO createReservation(@RequestBody ReservationDTO reservation, @PathVariable Long customerId ) throws Exception {
     return reservationService.createReservation(reservation, customerId);
   }
 

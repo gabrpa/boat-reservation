@@ -13,15 +13,15 @@ public class BoatController {
 
   @Autowired
   private BoatService boatService;
+  
+  @GetMapping("/all")
+  public List<Boat> getAllBoat() {
+    return boatService.getAllBoat();
+  }
 
   @GetMapping("/get/{id}")
   public Boat getBoatById(@PathVariable Long id) {
     return boatService.getBoatById(id);
-  }
-
-  @GetMapping("/gel/all")
-  public List<Boat> getAllBoat() {
-    return boatService.getAllBoat();
   }
 
   @PostMapping("/new")
